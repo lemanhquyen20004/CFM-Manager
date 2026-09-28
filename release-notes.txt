@@ -1,0 +1,4 @@
+- Thêm tự động kiểm tra cập nhật khi mở app
+- Tải APK sau khi người dùng đồng ý
+- Mở trình cài đặt Android sau khi tải xong
+- Chuẩn bị hệ thống GitHub Releases + update.json
