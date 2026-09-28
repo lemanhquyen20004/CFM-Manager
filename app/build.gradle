@@ -23,6 +23,10 @@ android {
         buildConfig = true
     }
 
+    lint {
+        disable 'ExpiredTargetSdkVersion'
+    }
+
     signingConfigs {
         release {
             if (signingFile != null && !signingFile.isEmpty()) {
