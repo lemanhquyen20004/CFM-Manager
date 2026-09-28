@@ -1,0 +1,47 @@
+name: Build APK Now
+
+on:
+  push:
+    branches:
+      - apk-build
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Build release APK
+        run: gradle :app:assembleRelease --no-daemon --stacktrace
+
+      - name: Prepare build outputs
+        shell: bash
+        run: |
+          mkdir -p cfm-output/build-tools/lib
+          cp app/build/outputs/apk/release/*.apk cfm-output/
+          cp "$ANDROID_HOME/build-tools/35.0.0/zipalign" cfm-output/build-tools/
+          cp "$ANDROID_HOME/build-tools/35.0.0/apksigner" cfm-output/build-tools/
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/apksigner.jar" cfm-output/build-tools/lib/
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: CFM-Manager-v1.1.0-unsigned
+          path: cfm-output/
+          retention-days: 1
+          if-no-files-found: error
