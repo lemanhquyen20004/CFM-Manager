@@ -1,0 +1,6 @@
+{
+  "versionCode": 2,
+  "versionName": "1.1.0",
+  "apkUrl": "https://github.com/lemanhquyen20004/CFM-Manager/releases/download/v1.1.0/CFM-Manager-v1.1.0.apk",
+  "changelog": "- Thêm tự động kiểm tra cập nhật khi mở app\n- Tải APK sau khi người dùng đồng ý\n- Mở trình cài đặt Android sau khi tải xong"
+}
